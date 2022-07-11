@@ -1,6 +1,9 @@
+import { AppStateInterface } from './../../../shared/types/appState.interface';
+import { isSubmittingSelector } from './../../store/selectors';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { registerAction } from '../../store/actions/register.action';
 
 @Component({
@@ -10,14 +13,20 @@ import { registerAction } from '../../store/actions/register.action';
 })
 export class RegisterComponent implements OnInit {
   form!: FormGroup
+  isSubmitting$: Observable<boolean> | undefined
 
   constructor(
-    private fb: FormBuilder,
-    private store: Store
+    private fb: UntypedFormBuilder,
+    private store: Store<AppStateInterface>
   ) { }
 
   ngOnInit() {
     this.formInit()
+    this.initValues()
+  }
+
+  initValues():void{
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector))
   }
 
   formInit(): void {
