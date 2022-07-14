@@ -4,5 +4,12 @@ import { RegisterRequestInterface } from '../../shared/types/registerRequest.int
 
 export const registerAction = createAction(
     actionTypes.REGISTER,
-    props<RegisterRequestInterface>()
+    props<{request: RegisterRequestInterface}>()
+);
+export const registerSuccessAction = createAction(
+    actionTypes.REGISTER_SUCCESS,
+    props<{currentUser:RegisterRequestInterface}>()
+);
+export const registerFailureAction = createAction(
+    actionTypes.REGISTER_FAILURE
 );

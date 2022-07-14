@@ -1,3 +1,6 @@
+import { RegisterRequestInterface } from './../../shared/types/registerRequest.interface';
+import { CurrentUserInterface } from './../../../shared/types/currentUser.interface';
+import { AuthService } from './../../services/auth.service';
 import { AppStateInterface } from './../../../shared/types/appState.interface';
 import { isSubmittingSelector } from './../../store/selectors';
 import { Component, OnInit } from '@angular/core';
@@ -17,7 +20,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: UntypedFormBuilder,
-    private store: Store<AppStateInterface>
+    private store: Store<AppStateInterface>,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -25,7 +29,7 @@ export class RegisterComponent implements OnInit {
     this.initValues()
   }
 
-  initValues():void{
+  initValues(): void {
     this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector))
   }
 
@@ -36,9 +40,12 @@ export class RegisterComponent implements OnInit {
       password: ['', Validators.required]
     })
   }
-  
-  onSubmit():void{
+
+  onSubmit(): void {
     console.log(this.form.value);
-    this.store.dispatch(registerAction(this.form.value))
+    const request: RegisterRequestInterface = {
+      user: this.form.value
+    }
+    this.store.dispatch(registerAction({request}))
   }
 }
