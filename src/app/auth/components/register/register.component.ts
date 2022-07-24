@@ -1,10 +1,9 @@
+import { BackendErrorsInterface } from './../../../shared/types/backendErrors.interface';
 import { RegisterRequestInterface } from './../../shared/types/registerRequest.interface';
-import { CurrentUserInterface } from './../../../shared/types/currentUser.interface';
-import { AuthService } from './../../services/auth.service';
 import { AppStateInterface } from './../../../shared/types/appState.interface';
-import { isSubmittingSelector } from './../../store/selectors';
+import { isSubmittingSelector, validationErrorsSelector } from './../../store/selectors';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { registerAction } from '../../store/actions/register.action';
@@ -16,12 +15,12 @@ import { registerAction } from '../../store/actions/register.action';
 })
 export class RegisterComponent implements OnInit {
   form!: FormGroup
-  isSubmitting$: Observable<boolean> | undefined
+  isSubmitting$!: Observable<boolean> 
+  backendErrors$!: Observable<BackendErrorsInterface | null>
 
   constructor(
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private store: Store<AppStateInterface>,
-    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -31,6 +30,7 @@ export class RegisterComponent implements OnInit {
 
   initValues(): void {
     this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector))
+    this.backendErrors$ = this.store.pipe(select(validationErrorsSelector))
   }
 
   formInit(): void {

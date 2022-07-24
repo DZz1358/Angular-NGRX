@@ -8,3 +8,8 @@ export const isSubmittingSelector = createSelector(
     authFutureSelector,
     (authState: AuthStateInterface) => authState.isSubmitting
 )
+
+export const validationErrorsSelector = createSelector(
+    authFutureSelector,
+    (authState: AuthStateInterface) => authState.validationErrors
+)

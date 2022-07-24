@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { reducer } from './store/reducer';
 import { EffectsModule } from '@ngrx/effects';
+import { BackendErrorMessagesModule } from '../shared/modules/backendErrorMessages/backendErrorMessages.module';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    BackendErrorMessagesModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     EffectsModule.forFeature([RegisterEffect]),

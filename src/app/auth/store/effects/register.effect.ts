@@ -1,10 +1,10 @@
-import { RegisterRequestInterface } from './../../shared/types/registerRequest.interface';
 import { CurrentUserInterface } from './../../../shared/types/currentUser.interface';
 import { AuthService } from './../../services/auth.service';
 import { registerAction, registerFailureAction, registerSuccessAction } from './../actions/register.action';
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { switchMap, map, catchError, of } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 
@@ -19,11 +19,11 @@ export class RegisterEffect {
         ofType(registerAction),
         switchMap(({ request }) => {
             return this.authService.register(request).pipe(
-                map((currentUser: any) => {
+                map((currentUser: CurrentUserInterface) => {
                     return registerSuccessAction({currentUser})
                 }),
-                catchError(() => {
-                    return of(registerFailureAction())
+                catchError((errorResponse: HttpErrorResponse) => {
+                    return of(registerFailureAction({errors: errorResponse.error.errors}))
                 })
             )
         })
