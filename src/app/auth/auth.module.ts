@@ -1,3 +1,6 @@
+import { LoginComponent } from './components/login/login.component';
+import { LoginEffect } from './store/effects/login.effect';
+import { PersistanceService } from './../shared/services/persistance.service';
 import { RegisterEffect } from './store/effects/register.effect';
 import { AuthService } from './services/auth.service';
 import { StoreModule } from '@ngrx/store';
@@ -16,6 +19,10 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent
   },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
 ]
 
 @NgModule({
@@ -24,14 +31,16 @@ const routes: Routes = [
     BackendErrorMessagesModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
-    EffectsModule.forFeature([RegisterEffect]),
+    EffectsModule.forFeature([RegisterEffect, LoginEffect]),
     StoreModule.forFeature('auth', reducer)
   ],
   declarations: [
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   providers: [
-    AuthService
+    AuthService,
+    PersistanceService
   ]
 })
 export class AuthModule { }
