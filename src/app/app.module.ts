@@ -1,3 +1,4 @@
+import { TopBarModule } from './shared/modules/topBar/topBar/topBar.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,7 +22,8 @@ import { EffectsModule } from '@ngrx/effects';
     HttpClientModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    TopBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

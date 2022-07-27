@@ -4,7 +4,7 @@ import { BackendErrorsInterface } from '../../../shared/types/backendErrors.inte
 import { AppStateInterface } from '../../../shared/types/appState.interface';
 import { isSubmittingSelector, validationErrorsSelector } from '../../store/selectors';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
