@@ -3,7 +3,8 @@ import { CurrentUserInterface } from './../../../shared/types/currentUser.interf
 import { RegisterRequestInterface } from './registerRequest.interface';
 export interface AuthStateInterface {
     isSubmitting: boolean
-    currentUser: CurrentUserInterface | null 
+    isLoading: boolean
+    currentUser: CurrentUserInterface | null
     isLoggedIn: boolean | null
     validationErrors: BackendErrorsInterface | null
 }

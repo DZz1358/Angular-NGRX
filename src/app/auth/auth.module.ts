@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { reducer } from './store/reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { BackendErrorMessagesModule } from '../shared/modules/backendErrorMessages/backendErrorMessages.module';
+import { GetCurrentUserEffect } from './store/effects/getCurrentUser.effect';
 
 const routes: Routes = [
   {
@@ -31,7 +32,7 @@ const routes: Routes = [
     BackendErrorMessagesModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
-    EffectsModule.forFeature([RegisterEffect, LoginEffect]),
+    EffectsModule.forFeature([RegisterEffect, LoginEffect, GetCurrentUserEffect]),
     StoreModule.forFeature('auth', reducer)
   ],
   declarations: [
