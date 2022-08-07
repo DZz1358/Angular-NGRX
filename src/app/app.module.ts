@@ -1,3 +1,4 @@
+import { GlobalFeedModule } from './global-feed/global-feed.module';
 import { AuthInterceptor } from './shared/services/authinterceptor.service';
 import { PersistanceService } from './shared/services/persistance.service';
 import { TopBarModule } from './shared/modules/topBar/topBar/topBar.module';
@@ -27,6 +28,7 @@ import { EffectsModule } from '@ngrx/effects';
       logOnly: environment.production,
     }),
     TopBarModule,
+    GlobalFeedModule
   ],
   providers: [
     PersistanceService,
