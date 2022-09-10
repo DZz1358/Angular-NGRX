@@ -1,3 +1,4 @@
+import { PaginationModule } from './../pagination/pagination.module';
 import { LoadingModule } from './../loading/loading.module';
 import { ErrorMessageModule } from './../error-message/error-message.module';
 import { RouterModule } from '@angular/router';
@@ -22,7 +23,8 @@ import { reducer } from './store/reducers';
     StoreModule.forFeature('feed', reducer),
     RouterModule,
     ErrorMessageModule,
-    LoadingModule
+    LoadingModule,
+    PaginationModule
   ],
   exports: [
     FeedComponent
